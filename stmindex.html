@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>University StoryMap in Kenya</title>
+
+    <!-- Add Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.0/dist/leaflet.css" />
+
+    <!-- Leaflet JS Library -->
+    <script src="https://unpkg.com/leaflet@1.9.0/dist/leaflet.js"></script>
+
+    <style>
+        /* Style the map container to ensure it displays */
+        #map {
+            height: 80vh; /* Use a responsive height instead of fixed 500px */
+            width: 100%;
+        }
+        .story-container {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Map Div -->
+    <div id="map"></div>
+
+    <!-- Story Content Div -->
+    <div class="story-container">
+        <h2> Take a look at major Universities in Kenya</h2>
+        <div id="story-content"></div>
+    </div>
+
+    <script>
+        // Initialize the map and set view to Kenya
+        var map = L.map('map').setView([-1.2921, 36.8219], 8);
+
+        // Add the OpenStreetMap tiles
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        // University data including MKU
+        var universities = [
+            {
+                "name": "University of Nairobi",
+                "location": [-1.2833, 36.8172],
+                "foundation": 1970,
+                "description": "The University of Nairobi is the oldest and largest university in Kenya.",
+                "image": "C:/Users/Admin/Downloads/uon.jpg" // Replace with your image file name
+            },
+            {
+                "name": "Kenyatta University",
+                "location": [-1.1822, 36.9273],
+                "foundation": 1985,
+                "description": "Kenyatta University is located in Nairobi and was founded in 1985.",
+                "image": "C:/Users/Admin/Downloads/KU.jpg" // Replace with your image file name
+            },
+            { 
+             "name": "JKUAT",
+             "location": [-1.1013,37.0139],
+             "foundation": 1994,
+             "description": "JKUAT offers courses in Technology, Engineering, Science and Medicine.",
+             "image": "C:/Users/Admin/Downloads/JKUAT.jpg" // Replace with your image file name
+            },
+            {
+                "name": "Moi University",
+                "location": [0.5143, 35.2698],
+                "foundation": 1984,
+                "description": "Moi University is based in Eldoret and focuses on science, engineering, and technology.",
+                "image": "C:/Users/Admin/Downloads/moi.jpg" // Replace with your image file name
+            },
+            {
+                "name": "Mount Kenya University",
+                "location": [-1.0439, 37.0847],
+                "foundation": 1996,
+                "description": "Mount Kenya University (MKU) is a private university located in Thika, Kenya, and was founded in 1996.",
+                "image": "C:/Users/Admin/Downloads/MKU.jpg" // Replace with your image file name
+            },
+             {
+                "name": "Egerton University",
+                "location": [-0.3711, 35.9408],
+                "foundation": 1987,
+                "description": "Egerton University is public university located in Nakuru county. It was funded in 1939 as a farm school.The university majors in agricultural courses.",
+                "image": "C:/Users/Admin/Downloads/egerton.jpg"
+            },
+            {
+                "name": "Maseno University",
+                "location": [-0.0061,34.5972],
+                "foundation": 2001,
+                "description": "Maseno University is a public university based in the Maseno district of the Kisumu County, Kenya, along the Equator. It was fully fledged as a university in 2001, after being a constituent college of Moi University for a decade.",
+                "image": "C:/Users/Admin/Downloads/maseno.jpg"
+            },
+            {
+                "name": "Technical University of Mombasa",
+                "location":[-4.0372,39.6683],
+                "foundation": 2013, 
+                "description": "Technical University of Mombasa is a public university located in the coastal city of Mombasa. It is one of the National Polytechnics recently elevated to a fully fledged University in Kenya.",
+                "image": "C:/Users/Admin/Downloads/tum.jpg"
+            }
+        ];
+
+        // Add university markers
+        universities.forEach(function(university) {
+            var marker = L.marker(university.location).addTo(map);
+            marker.bindPopup(`
+                <h3>${university.name}</h3>
+                <p>Founded: ${university.foundation}</p>
+                <p>${university.description}</p>
+                <img src="${university.image}" width="200" height="150">
+            `);
+        });
+    </script>
+</body>
+</html>
